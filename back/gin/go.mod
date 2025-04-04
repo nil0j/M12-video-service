@@ -1,4 +1,4 @@
-module github.com/nil0j/M12-video-service/front
+module github.com/nil0j/video-service
 
 go 1.24.1
 

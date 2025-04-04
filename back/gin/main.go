@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nil0j/M12-video-service/front/pkg/routes"
+	"github.com/nil0j/video-service/routes"
 )
 
 func main() {
