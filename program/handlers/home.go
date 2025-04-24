@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func MainPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "index.html", gin.H{
+func HomePage(c *gin.Context) {
+	c.HTML(http.StatusOK, "home", gin.H{
 		"key": "value",
 	})
 }

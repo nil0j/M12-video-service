@@ -1,0 +1,15 @@
+{{ define "upload" }}
+{{ template "partials/head" . }}
+
+<h1>upload video</h1>
+<form action="./" method="post">
+    <label for="title">title</label><br>
+    <input type="text" name="title"><br><br>
+    <label for="description">description</label><br>
+    <input type="text" name="description"><br><br>
+    <input type="file" name="video"><br>
+    <input type="submit">
+</form>
+
+{{ template "partials/foot" . }}
+{{ end }}
