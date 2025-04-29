@@ -3,10 +3,4 @@
 Berni puja els arxius per fer proves a ignore/,
 per no pujar-los al github.
 
-Rutes:
-```
-/
-/video (GET/POST)
-/video/{id}
-/upload (GET/POST)
-```
+Routes listed at /program/routes/routes.go
