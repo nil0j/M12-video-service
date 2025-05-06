@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nil0j/jirafeitor/repository"
 )
 
 func UploadPage(c *gin.Context) {
@@ -19,7 +20,9 @@ func UploadVideo(c *gin.Context) {
 
 	file, err := c.FormFile("video")
 	if err != nil {
-		c.JSON(400, "file is not a video")
+		c.JSON(400, gin.H{
+			"message": fmt.Sprintf("%v", err),
+		})
 		return
 	}
 
@@ -29,6 +32,12 @@ func UploadVideo(c *gin.Context) {
 
 	}
 
-	c.SaveUploadedFile(file, "./filesystem/video/"+file.Filename)
+	id, err := repository.CreateVideo(title, description)
+	if err != nil {
+		c.JSON(400, fmt.Sprintf("error: %v", err))
+		return
+	}
+
+	c.SaveUploadedFile(file, "./filesystem/"+fmt.Sprintf("%d", id)+"/"+file.Filename)
 	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
 }
