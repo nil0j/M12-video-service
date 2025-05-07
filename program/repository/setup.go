@@ -20,8 +20,6 @@ func Setup() error {
 	}
 
 	createInitialTables()
-
-	defer conn.Close(context.Background())
 	return nil
 }
 

@@ -2,9 +2,10 @@ package handlers
 
 import (
 	"net/http"
+	"os"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
-	"github.com/nil0j/jirafeitor/repository"
 )
 
 func VideoPage(c *gin.Context) {
@@ -12,12 +13,19 @@ func VideoPage(c *gin.Context) {
 }
 
 func GetVideo(c *gin.Context) {
-	// c.File("./ignore/Billie Jean (low quality).mp4")
-	videos, err := repository.GetAllVideos()
+	folderPath := "./filesystem/" + c.Param("id")
+	files, err := os.ReadDir(folderPath)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(400, gin.H{"message": err})
 		return
 	}
 
-	c.JSON(http.StatusOK, videos)
+	if len(files) == 0 {
+		c.JSON(400, gin.H{"message": "file not found"})
+		return
+	}
+
+	filePath := filepath.Join(folderPath, files[0].Name())
+
+	c.File(filePath)
 }

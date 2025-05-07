@@ -7,7 +7,7 @@ import (
 )
 
 func CreateUser(username string, password string) error {
-	_, err := conn.Exec(context.Background(), "INSERT INTO jirafeitor.users (username, password) VALUES ($1, $2)", username, password)
+	_, err := conn.Exec(context.Background(), "INSERT INTO users (username, password) VALUES ($1, $2)", username, password)
 	if err != nil {
 		return err
 	}
@@ -16,7 +16,7 @@ func CreateUser(username string, password string) error {
 
 func GetUser(username string) (*postgres.PostgresUser, error) {
 	var user postgres.PostgresUser
-	err := conn.QueryRow(context.Background(), "SELECT id, username, password FROM jirafeitor.users WHERE username = $1", username).Scan(&user.ID, &user.Username, &user.Password)
+	err := conn.QueryRow(context.Background(), "SELECT id, username, password FROM users WHERE username = $1", username).Scan(&user.ID, &user.Username, &user.Password)
 	if err != nil {
 		return nil, err
 	}

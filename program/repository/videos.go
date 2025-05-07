@@ -8,7 +8,7 @@ import (
 
 func CreateVideo(title string, description string) (int, error) {
 	var id int
-	err := conn.QueryRow(context.Background(), "INSERT INTO jirafeitor.videos (title, description, user_id) VALUES ($1, $2) RETURNING id", title, description).Scan(&id)
+	err := conn.QueryRow(context.Background(), "insert into videos (name, description) VALUES ($1, $2) RETURNING id", title, description).Scan(&id)
 	if err != nil {
 		return 0, err
 	}
@@ -16,7 +16,7 @@ func CreateVideo(title string, description string) (int, error) {
 }
 
 func GetAllVideos() ([]postgres.Video, error) {
-	rows, err := conn.Query(context.Background(), "SELECT id, title, description, user_id FROM jirafeitor.videos")
+	rows, err := conn.Query(context.Background(), "SELECT id, title, description, user_id FROM videos")
 	if err != nil {
 		return nil, err
 	}
