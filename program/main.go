@@ -10,14 +10,17 @@ import (
 )
 
 func main() {
-	config.Setup()
+	if err := config.Setup(); err != nil {
+		log.Panic(err)
+	}
 
 	setupFilesystem()
+
 	err := repository.Setup()
 	if err != nil {
-		log.Println(err)
-		return
+		log.Panic(err)
 	}
+
 	routes.Run()
 }
 

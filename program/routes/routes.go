@@ -10,12 +10,15 @@ func Run() {
 	router := gin.Default()
 
 	router.LoadHTMLGlob("templates/*/*")
+	baseGroup := router.Group("api")
 
-	router.GET("/", handlers.HomePage)
-	router.GET("/upload", handlers.UploadPage)
-	router.POST("/upload", handlers.UploadVideo)
-	router.GET("/video", handlers.VideoPage)
-	router.GET("/video/:id", handlers.GetVideo)
+	baseGroup.GET("/", handlers.HomePage)
+	baseGroup.GET("/upload", handlers.UploadPage)
+	baseGroup.POST("/upload", handlers.UploadVideo)
+	baseGroup.GET("/video", handlers.VideoPage)
+	baseGroup.GET("/video/:id", handlers.GetVideo)
+
+	baseGroup.POST("/", handlers.Login)
 
 	router.SetTrustedProxies(nil)
 	router.Run("localhost:8080")

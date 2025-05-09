@@ -1,7 +1,5 @@
-/*
 if not exists create database jirafeitor;
 create user jirafeitor_user with password 'changeme';
-*/
 
 \connect jirafeitor;
 

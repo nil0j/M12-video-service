@@ -9,10 +9,7 @@ import (
 func CreateVideo(title string, description string) (int, error) {
 	var id int
 	err := conn.QueryRow(context.Background(), "insert into videos (name, description) VALUES ($1, $2) RETURNING id", title, description).Scan(&id)
-	if err != nil {
-		return 0, err
-	}
-	return id, nil
+	return id, err
 }
 
 func GetAllVideos() ([]postgres.Video, error) {
