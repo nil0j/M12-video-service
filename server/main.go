@@ -17,7 +17,7 @@ import (
 // @in header
 // @name Authorization
 
-// @host localhost:8080
+// @host giraffe.niliara.net
 // @BasePath /api
 func main() {
 	if err := config.Setup(); err != nil {
