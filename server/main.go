@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/nil0j/jirafeitor/config"
 	_ "github.com/nil0j/jirafeitor/docs" // Add this line
@@ -18,14 +17,12 @@ import (
 // @in header
 // @name token
 
-// @host localhost:8080
+// @host giraffe.niliara.net
 // @BasePath /api
 func main() {
 	if err := config.Setup(); err != nil {
 		log.Panic(err)
 	}
-
-	setupFilesystem()
 
 	err := repository.Setup()
 	if err != nil {
@@ -33,11 +30,4 @@ func main() {
 	}
 
 	routes.Run()
-}
-
-func setupFilesystem() {
-	err := os.MkdirAll("./filesystem", 0770)
-	if err != nil {
-		log.Panic(err)
-	}
 }

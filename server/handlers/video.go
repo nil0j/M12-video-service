@@ -12,10 +12,10 @@ import (
 )
 
 // @Tags Videos
-// @Param id query int true "Video ID"
+// @Param id path int true "Video ID"
 // @Success 200 {file} file "Video file"
 // @Success 400 {object} responses.jsonError
-// @Router /video/source [get]
+// @Router /video/source/{id} [get]
 func GetVideo(c *gin.Context) {
 	folderPath := config.Data.Filesystem + c.Param("id")
 	files, err := os.ReadDir(folderPath)
@@ -41,10 +41,10 @@ func GetVideo(c *gin.Context) {
 }
 
 // @Tags Videos
-// @Param id query int true "Video ID"
+// @Param id path int true "Video ID"
 // @Success 200 {file} file "Image file"
 // @Success 400 {object} responses.jsonError
-// @Router /video/thumbnail [get]
+// @Router /video/thumbnail/{id} [get]
 func GetVideoThumbnail(c *gin.Context) {
 	folderPath := config.Data.Filesystem + c.Param("id")
 	files, err := os.ReadDir(folderPath)
@@ -63,10 +63,10 @@ func GetVideoThumbnail(c *gin.Context) {
 }
 
 // @Tags Videos
-// @Param id query int true "Video ID"
+// @Param id path int true "Video ID"
 // @Success 200 {object} postgres.Video
 // @Success 400 {object} responses.jsonError
-// @Router /video/info [get]
+// @Router /video/info/{id} [get]
 func GetVideoInfo(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

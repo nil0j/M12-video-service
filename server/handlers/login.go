@@ -66,13 +66,14 @@ func Login(c *gin.Context) {
 }
 
 // @Tags Login
-// @Param id query int true "Video ID"
+// @Param id path int true "Video ID"
 // @Success 200 {object} postgres.PostgresUser
 // @Success 400 {object} responses.jsonError
-// @Router /user [get]
+// @Router /user/{id}} [get]
 func GetUser(c *gin.Context) {
 	inputId, _ := c.Get("UserID")
 	id := -1
+
 	switch v := inputId.(type) {
 	case int:
 		id = v

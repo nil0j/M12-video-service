@@ -44,7 +44,7 @@ definitions:
       message:
         type: string
     type: object
-host: localhost:8080
+host: giraffe.niliara.net
 info:
   contact: {}
   description: A video service made using gin-gonic
@@ -122,11 +122,11 @@ paths:
       - ApiKeyAuth: []
       tags:
       - Videos
-  /user:
+  /user/{id}}:
     get:
       parameters:
       - description: Video ID
-        in: query
+        in: path
         name: id
         required: true
         type: integer
@@ -141,11 +141,11 @@ paths:
             $ref: '#/definitions/responses.jsonError'
       tags:
       - Login
-  /video/info:
+  /video/info/{id}:
     get:
       parameters:
       - description: Video ID
-        in: query
+        in: path
         name: id
         required: true
         type: integer
@@ -160,11 +160,11 @@ paths:
             $ref: '#/definitions/responses.jsonError'
       tags:
       - Videos
-  /video/source:
+  /video/source/{id}:
     get:
       parameters:
       - description: Video ID
-        in: query
+        in: path
         name: id
         required: true
         type: integer
@@ -179,11 +179,11 @@ paths:
             $ref: '#/definitions/responses.jsonError'
       tags:
       - Videos
-  /video/thumbnail:
+  /video/thumbnail/{id}:
     get:
       parameters:
       - description: Video ID
-        in: query
+        in: path
         name: id
         required: true
         type: integer
