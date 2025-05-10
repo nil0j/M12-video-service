@@ -18,6 +18,7 @@ func Run() {
 
 	baseGroup.POST("login", handlers.Login)
 	baseGroup.POST("register", middlewares.Ultrapass(), handlers.Register)
+	baseGroup.GET("user", middlewares.JWT(), handlers.GetUser)
 
 	baseGroup.POST("upload", middlewares.JWT(), handlers.UploadVideo)
 

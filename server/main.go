@@ -13,11 +13,11 @@ import (
 // @version	1.0
 // @description A video service made using gin-gonic
 
-// @securityDefinitions.apiKey JWT
+// @securityDefinitions.apikey JWT
 // @in header
-// @name token
+// @name Authorization
 
-// @host giraffe.niliara.net
+// @host localhost:8080
 // @BasePath /api
 func main() {
 	if err := config.Setup(); err != nil {

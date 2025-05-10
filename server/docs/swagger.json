@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "giraffe.niliara.net",
+    "host": "localhost:8080",
     "basePath": "/api",
     "paths": {
         "/login": {
@@ -77,7 +77,7 @@
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "JWT": []
                     }
                 ],
                 "tags": [
@@ -122,19 +122,15 @@
                 }
             }
         },
-        "/user/{id}}": {
+        "/user": {
             "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
                 "tags": [
                     "Login"
-                ],
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Video ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -349,7 +345,7 @@
     "securityDefinitions": {
         "JWT": {
             "type": "apiKey",
-            "name": "token",
+            "name": "Authorization",
             "in": "header"
         }
     }

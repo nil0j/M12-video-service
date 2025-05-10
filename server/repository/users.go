@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"log"
 
 	"github.com/nil0j/jirafeitor/models/errorresponses"
 	"github.com/nil0j/jirafeitor/models/postgres"
@@ -36,6 +37,7 @@ func CreateUser(user postgres.PostgresUserPost) (string, error) {
 
 func LogIn(user postgres.PostgresUserPost) (string, error) {
 	var response postgres.PostgresUser
+	log.Println(user)
 	err := conn.QueryRow(context.Background(), "SELECT id, username, password FROM users WHERE username = $1", user.Username).Scan(&response.ID, &response.Username, &response.Password)
 	if err != nil {
 		return "", err
@@ -55,6 +57,7 @@ func LogIn(user postgres.PostgresUserPost) (string, error) {
 
 func GetUser(id int) (postgres.PostgresUserInfo, error) {
 	var username string
+	log.Println(id)
 	err := conn.QueryRow(context.Background(), "SELECT username FROM users WHERE id = $1", id).Scan(&username)
 	if err != nil {
 		return postgres.PostgresUserInfo{}, err

@@ -18,7 +18,7 @@ import (
 // @Param video formData file true "Video file"
 // @Success 200 {object} responses.jsonSuccess
 // @Failure 400 {object} responses.jsonError
-// @Security ApiKeyAuth
+// @Security JWT
 // @Router /upload [post]
 func UploadVideo(c *gin.Context) {
 	name := c.PostForm("name")

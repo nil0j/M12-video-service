@@ -83,7 +83,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApiKeyAuth": []
+                        "JWT": []
                     }
                 ],
                 "tags": [
@@ -128,19 +128,15 @@ const docTemplate = `{
                 }
             }
         },
-        "/user/{id}}": {
+        "/user": {
             "get": {
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
                 "tags": [
                     "Login"
-                ],
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Video ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
                 ],
                 "responses": {
                     "200": {
@@ -355,7 +351,7 @@ const docTemplate = `{
     "securityDefinitions": {
         "JWT": {
             "type": "apiKey",
-            "name": "token",
+            "name": "Authorization",
             "in": "header"
         }
     }
@@ -364,7 +360,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "giraffe.niliara.net",
+	Host:             "localhost:8080",
 	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "Jirafeitor API",

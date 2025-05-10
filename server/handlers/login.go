@@ -66,10 +66,10 @@ func Login(c *gin.Context) {
 }
 
 // @Tags Login
-// @Param id path int true "Video ID"
 // @Success 200 {object} postgres.PostgresUser
 // @Success 400 {object} responses.jsonError
-// @Router /user/{id}} [get]
+// @Security JWT
+// @Router /user [get]
 func GetUser(c *gin.Context) {
 	inputId, _ := c.Get("UserID")
 	id := -1
