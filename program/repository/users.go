@@ -12,7 +12,7 @@ func CreateUser(user postgres.PostgresUserPost) (string, error) {
 	var tmpUsername string
 	err := conn.QueryRow(context.Background(), "SELECT username FROM users WHERE username = $1", user.Username).Scan(&tmpUsername)
 	if err == nil {
-		return "", errorresponses.UserNotFound
+		return "", errorresponses.UserAlreadyExists
 	}
 
 	passwordHash, err := auth.Hash(user.Password)
@@ -20,11 +20,13 @@ func CreateUser(user postgres.PostgresUserPost) (string, error) {
 		return "", err
 	}
 
-	if _, err := conn.Exec(context.Background(), "INSERT INTO users (username, password) VALUES ($1, $2)", user.Username, passwordHash); err != nil {
+	var id int
+	query := "INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id"
+	if err := conn.QueryRow(context.Background(), query, user.Username, passwordHash).Scan(&id); err != nil {
 		return "", err
 	}
 
-	token, err := auth.GenerateToken(user.Username)
+	token, err := auth.GenerateToken(id)
 	if err != nil {
 		return "", err
 	}
@@ -40,7 +42,7 @@ func LogIn(user postgres.PostgresUserPost) (string, error) {
 	}
 
 	if auth.CheckPasswordHash(user.Password, response.Password) {
-		token, err := auth.GenerateToken(user.Username)
+		token, err := auth.GenerateToken(response.ID)
 		if err != nil {
 			return "", err
 		}

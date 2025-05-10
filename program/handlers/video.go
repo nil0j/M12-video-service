@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -11,10 +10,6 @@ import (
 	"github.com/nil0j/jirafeitor/models/responses"
 	"github.com/nil0j/jirafeitor/repository"
 )
-
-func VideoPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "video", gin.H{})
-}
 
 func GetVideo(c *gin.Context) {
 	folderPath := config.Data.Filesystem + c.Param("id")
@@ -85,5 +80,11 @@ func GetRecentVideos(c *gin.Context) {
 		}
 	}
 
-	repository.GetRecentVideos(limit)
+	videos, err := repository.GetRecentVideos(limit)
+	if err != nil {
+		responses.HandleError(c, err)
+		return
+	}
+
+	c.JSON(200, videos)
 }

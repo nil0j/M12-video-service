@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -11,10 +10,6 @@ import (
 	"github.com/nil0j/jirafeitor/repository"
 	"github.com/nil0j/jirafeitor/utils/thumbnail"
 )
-
-func UploadPage(c *gin.Context) {
-	c.HTML(http.StatusOK, "upload", gin.H{})
-}
 
 func UploadVideo(c *gin.Context) {
 	title := c.PostForm("title")

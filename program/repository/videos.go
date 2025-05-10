@@ -25,7 +25,7 @@ func GetVideoInfo(id int) (postgres.Video, error) {
 func GetRecentVideos(limit int) ([]postgres.Video, error) {
 	rows, err := conn.Query(
 		context.Background(),
-		"SELECT id, title, description, user_id FROM videos ORDER BY user_id DESC LIMIT $1",
+		"SELECT id, name, description, user_id FROM videos ORDER BY user_id DESC LIMIT $1",
 		limit,
 	)
 	if err != nil {
