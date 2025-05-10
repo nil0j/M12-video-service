@@ -5,3 +5,8 @@ type PostgresUser struct {
 	Username string
 	Password string
 }
+
+type PostgresUserPost struct {
+	Username string
+	Password string
+}

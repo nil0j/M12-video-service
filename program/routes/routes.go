@@ -15,8 +15,13 @@ func Run() {
 	baseGroup.GET("/", handlers.HomePage)
 	baseGroup.GET("/upload", handlers.UploadPage)
 	baseGroup.POST("/upload", handlers.UploadVideo)
-	baseGroup.GET("/video", handlers.VideoPage)
-	baseGroup.GET("/video/:id", handlers.GetVideo)
+
+	videoGroup := baseGroup.Group("video")
+	baseGroup.GET("video", handlers.VideoPage)
+
+	videoGroup.GET("source/:id", handlers.GetVideo)
+	videoGroup.GET("info/:id", handlers.GetVideoInfo)
+	videoGroup.GET("thumb/:id", handlers.GetVideoThumbnail)
 
 	baseGroup.POST("/", handlers.Login)
 

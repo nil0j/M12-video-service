@@ -6,7 +6,10 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/nil0j/jirafeitor/config"
+	"github.com/nil0j/jirafeitor/models/responses"
 	"github.com/nil0j/jirafeitor/repository"
+	"github.com/nil0j/jirafeitor/utils/thumbnail"
 )
 
 func UploadPage(c *gin.Context) {
@@ -26,18 +29,21 @@ func UploadVideo(c *gin.Context) {
 		return
 	}
 
-	if err := os.MkdirAll("./filesystem/video", 0770); err != nil {
-		c.JSON(400, fmt.Sprintf("error: %v", err))
-		return
-
-	}
-
 	id, err := repository.CreateVideo(title, description)
 	if err != nil {
 		c.JSON(400, fmt.Sprintf("error: %v", err))
 		return
 	}
 
-	c.SaveUploadedFile(file, "./filesystem/"+fmt.Sprintf("%d", id)+"/"+file.Filename)
-	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+	videoOutFolderPath := config.Data.Filesystem + fmt.Sprintf("%d", id) + "/"
+	if err := os.MkdirAll(videoOutFolderPath, 0755); err != nil {
+		c.JSON(400, fmt.Sprintf("error: %v", err))
+		return
+	}
+
+	videoOutPath := videoOutFolderPath + file.Filename
+	c.SaveUploadedFile(file, videoOutPath)
+
+	thumbnail.Gen(videoOutPath, videoOutFolderPath)
+	responses.HandleSuccess(c, "File uploaded correctly!")
 }

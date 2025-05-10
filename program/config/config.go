@@ -12,6 +12,7 @@ var Data = appData{}
 
 type appData struct {
 	Filesystem string
+	Static     string
 	Db_url     string
 	Secret     string
 }
@@ -30,9 +31,21 @@ func Setup() error {
 		return errors.New("Environment variable SECRET not set")
 	}
 
+	if os.Getenv("JIRAFEITOR_ROOT") == "" {
+		return errors.New("Environment variable FILESYSTEM not set")
+	}
+
+	filesystemPath := os.Getenv("JIRAFEITOR_ROOT") + "filesystem/"
+	staticPath := os.Getenv("JIRAFEITOR_ROOT") + "static/"
+
+	os.MkdirAll(filesystemPath, 0755)
+	os.MkdirAll(staticPath, 0755)
+
 	Data = appData{
-		Filesystem: "./filesystem",
+		Filesystem: filesystemPath,
+		Static:     staticPath,
 		Db_url:     os.Getenv("DB_URL"),
+		Secret:     os.Getenv("SECRET"),
 	}
 
 	return nil

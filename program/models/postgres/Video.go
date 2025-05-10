@@ -2,7 +2,7 @@ package postgres
 
 type Video struct {
 	ID          int
-	Title       string
+	Name        string
 	Description string
 	UserID      int
 }

@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	"github.com/nil0j/jirafeitor/config"
 )
 
 func GenerateToken(username string) (string, error) {
@@ -14,7 +15,7 @@ func GenerateToken(username string) (string, error) {
 	claims["authorized"] = true
 	claims["user"] = "username"
 
-	tokenString, err := token.SignedString(config.Secret)
+	tokenString, err := token.SignedString(config.Data.Secret)
 	if err != nil {
 		return "", err
 	}
