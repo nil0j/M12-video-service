@@ -14,7 +14,7 @@ func CreateVideo(input postgres.Video) (int, error) {
 
 func GetVideoInfo(id int) (postgres.Video, error) {
 	var info postgres.Video
-	err := conn.QueryRow(context.Background(), "select (id, name, description) from videos where id = $1", id).Scan(&info.ID, &info.Name, &info.Description)
+	err := conn.QueryRow(context.Background(), "select id, name, description from videos where id = $1", id).Scan(&info.ID, &info.Name, &info.Description)
 	if err != nil {
 		return postgres.Video{}, err
 	}
