@@ -10,7 +10,7 @@ drop table users;
 
 create table users (
     id serial primary key,
-    username varchar(255),
+    username varchar(255) unique,
     password varchar(255)
 );
 
