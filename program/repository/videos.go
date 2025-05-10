@@ -6,9 +6,9 @@ import (
 	"context"
 )
 
-func CreateVideo(title, description string) (int, error) {
+func CreateVideo(input postgres.Video) (int, error) {
 	var id int
-	err := conn.QueryRow(context.Background(), "insert into videos (name, description) VALUES ($1, $2) RETURNING id", title, description).Scan(&id)
+	err := conn.QueryRow(context.Background(), "insert into videos (name, description, user_id) VALUES ($1, $2, $3) RETURNING id", input.Name, input.Description, input.UserID).Scan(&id)
 	return id, err
 }
 

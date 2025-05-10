@@ -6,15 +6,23 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/nil0j/jirafeitor/config"
+	"github.com/nil0j/jirafeitor/models/postgres"
 	"github.com/nil0j/jirafeitor/models/responses"
 	"github.com/nil0j/jirafeitor/repository"
 	"github.com/nil0j/jirafeitor/utils/thumbnail"
 )
 
+// @Tags Videos
+// @Param name formData string true "Video name"
+// @Param description formData string true "Video description"
+// @Param video formData file true "Video file"
+// @Success 200 {object} responses.jsonSuccess
+// @Failure 400 {object} responses.jsonError
+// @Security ApiKeyAuth
+// @Router /upload [post]
 func UploadVideo(c *gin.Context) {
-	title := c.PostForm("title")
+	name := c.PostForm("name")
 	description := c.PostForm("description")
-	_, _ = title, description
 
 	file, err := c.FormFile("video")
 	if err != nil {
@@ -24,7 +32,20 @@ func UploadVideo(c *gin.Context) {
 		return
 	}
 
-	id, err := repository.CreateVideo(title, description)
+	inputId, _ := c.Get("UserID")
+
+	userId := 0
+	switch t := inputId.(type) {
+	case int:
+		userId = t
+	}
+
+	id, err := repository.CreateVideo(postgres.Video{
+		Name:        name,
+		Description: description,
+		UserID:      userId,
+	})
+
 	if err != nil {
 		c.JSON(400, fmt.Sprintf("error: %v", err))
 		return

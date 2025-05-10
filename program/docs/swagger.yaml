@@ -1,0 +1,226 @@
+basePath: /api
+definitions:
+  postgres.PostgresUser:
+    properties:
+      id:
+        type: integer
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  postgres.PostgresUserPost:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  postgres.Video:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      userID:
+        type: integer
+    type: object
+  responses.jsonError:
+    properties:
+      error:
+        type: string
+    type: object
+  responses.jsonJWTSuccess:
+    properties:
+      message:
+        type: string
+      token:
+        type: string
+    type: object
+  responses.jsonSuccess:
+    properties:
+      message:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: A video service made using gin-gonic
+  title: Jirafeitor API
+  version: "1.0"
+paths:
+  /login:
+    post:
+      parameters:
+      - description: JSON request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/postgres.PostgresUserPost'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.jsonJWTSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Login
+  /register:
+    post:
+      parameters:
+      - description: JSON request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/postgres.PostgresUserPost'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.jsonJWTSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Login
+  /upload:
+    post:
+      parameters:
+      - description: Video name
+        in: formData
+        name: name
+        required: true
+        type: string
+      - description: Video description
+        in: formData
+        name: description
+        required: true
+        type: string
+      - description: Video file
+        in: formData
+        name: video
+        required: true
+        type: file
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/responses.jsonSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Videos
+  /user:
+    get:
+      parameters:
+      - description: Video ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/postgres.PostgresUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Login
+  /video/info:
+    get:
+      parameters:
+      - description: Video ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/postgres.Video'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Videos
+  /video/source:
+    get:
+      parameters:
+      - description: Video ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Video file
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Videos
+  /video/thumbnail:
+    get:
+      parameters:
+      - description: Video ID
+        in: query
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Image file
+          schema:
+            type: file
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Videos
+  /videos:
+    get:
+      parameters:
+      - description: Limit amount of videos
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/postgres.Video'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Videos
+securityDefinitions:
+  JWT:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"

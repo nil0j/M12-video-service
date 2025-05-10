@@ -52,3 +52,13 @@ func LogIn(user postgres.PostgresUserPost) (string, error) {
 
 	return "", errorresponses.PasswordDontMatch
 }
+
+func GetUser(id int) (postgres.PostgresUserInfo, error) {
+	var username string
+	err := conn.QueryRow(context.Background(), "SELECT username FROM users WHERE id = $1", id).Scan(&username)
+	if err != nil {
+		return postgres.PostgresUserInfo{}, err
+	}
+
+	return postgres.PostgresUserInfo{ID: id, Username: username}, nil
+}

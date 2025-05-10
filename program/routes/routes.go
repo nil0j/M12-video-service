@@ -5,20 +5,21 @@ import (
 	"github.com/nil0j/jirafeitor/middlewares"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func Run() {
 	router := gin.Default()
+
+	router.GET("/api/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	baseGroup := router.Group("api")
 
 	baseGroup.POST("login", handlers.Login)
 	baseGroup.POST("register", middlewares.Ultrapass(), handlers.Register)
 
-	{
-		uploadGroup := router.Group("upload", middlewares.JWT())
-		uploadGroup.POST("", handlers.UploadVideo)
-	}
+	baseGroup.POST("upload", middlewares.JWT(), handlers.UploadVideo)
 
 	baseGroup.GET("videos", handlers.GetRecentVideos)
 	{

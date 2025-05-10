@@ -20,7 +20,7 @@ func JWT() gin.HandlerFunc {
 
 		tokenString := authData[1]
 		auth.TokenIsValid(tokenString)
-		c.Set("userID", auth.GetTokenUserID(tokenString))
+		c.Set("UserID", auth.GetTokenUserID(tokenString))
 		c.Next()
 	}
 }

@@ -11,6 +11,11 @@ import (
 	"github.com/nil0j/jirafeitor/repository"
 )
 
+// @Tags Videos
+// @Param id query int true "Video ID"
+// @Success 200 {file} file "Video file"
+// @Success 400 {object} responses.jsonError
+// @Router /video/source [get]
 func GetVideo(c *gin.Context) {
 	folderPath := config.Data.Filesystem + c.Param("id")
 	files, err := os.ReadDir(folderPath)
@@ -35,6 +40,11 @@ func GetVideo(c *gin.Context) {
 	c.File(filePath)
 }
 
+// @Tags Videos
+// @Param id query int true "Video ID"
+// @Success 200 {file} file "Image file"
+// @Success 400 {object} responses.jsonError
+// @Router /video/thumbnail [get]
 func GetVideoThumbnail(c *gin.Context) {
 	folderPath := config.Data.Filesystem + c.Param("id")
 	files, err := os.ReadDir(folderPath)
@@ -52,6 +62,11 @@ func GetVideoThumbnail(c *gin.Context) {
 	c.File(filePath)
 }
 
+// @Tags Videos
+// @Param id query int true "Video ID"
+// @Success 200 {object} postgres.Video
+// @Success 400 {object} responses.jsonError
+// @Router /video/info [get]
 func GetVideoInfo(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -68,6 +83,11 @@ func GetVideoInfo(c *gin.Context) {
 	responses.HandleVideoInfo(c, videoInfo)
 }
 
+// @Tags Videos
+// @Param limit query int false "Limit amount of videos"
+// @Success 200 {object} []postgres.Video
+// @Success 400 {object} responses.jsonError
+// @Router /videos [get]
 func GetRecentVideos(c *gin.Context) {
 	var limit int
 	{
