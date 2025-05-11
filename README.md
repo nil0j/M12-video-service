@@ -12,7 +12,7 @@ This project was developed as part of the Web Development course at ETP Xavier.
 
 * **Cool videos!!:** El berni hace piruetas
 * **Thumbnails and info:** It is indeed a very complete API.
-* **Sessions and authentication:** So that we don't get anons posting <insert illegal video title here>
+* **Sessions and authentication:** So that we don't get anons posting \<insert illegal video title here\>
 * **Upload and search for videos:** To interact with the api (it's interactive!!)
 
 **Limitations:**
