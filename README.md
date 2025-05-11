@@ -1,6 +1,4 @@
-# Video service - projecte final
-
-# [Your Project Name] - Go Video Service
+# Jirafeitor Video service - final project
 
 [![Go](https://img.shields.io/badge/Go-1.x-blue.svg?style=flat-square)](https://golang.org/)
 
@@ -103,3 +101,9 @@ All the libraries they depend on are in the go.mod and Cargo.toml files.
 
 ## Endpoints
 Listed in the [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api/docs/index.html)
+
+## Honorable mentions
+There was an attempt to make a cross-platform GUI
+(located at gtk-front/.
+However, Rust's way to handle async and borrowing
+made it extremely hard and we had to give it up.
