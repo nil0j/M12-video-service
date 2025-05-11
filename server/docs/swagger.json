@@ -269,6 +269,44 @@
                     }
                 }
             }
+        },
+        "/videos/search": {
+            "get": {
+                "tags": [
+                    "Videos"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Search term",
+                        "name": "term",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search results limit amount",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/postgres.Video"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/responses.jsonError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {

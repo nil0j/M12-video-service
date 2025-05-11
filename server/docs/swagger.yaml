@@ -214,6 +214,30 @@ paths:
             $ref: '#/definitions/responses.jsonError'
       tags:
       - Videos
+  /videos/search:
+    get:
+      parameters:
+      - description: Search term
+        in: query
+        name: term
+        type: string
+      - description: Search results limit amount
+        in: query
+        name: limit
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/postgres.Video'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/responses.jsonError'
+      tags:
+      - Videos
 securityDefinitions:
   JWT:
     in: header

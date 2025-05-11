@@ -23,6 +23,7 @@ func Run() {
 	baseGroup.POST("upload", middlewares.JWT(), handlers.UploadVideo)
 
 	baseGroup.GET("videos", handlers.GetRecentVideos)
+	baseGroup.GET("videos/search", handlers.Search)
 	{
 		videoGroup := baseGroup.Group("video")
 		videoGroup.GET("source/:id", handlers.GetVideo)

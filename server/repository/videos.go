@@ -48,3 +48,31 @@ func GetRecentVideos(limit int) ([]postgres.Video, error) {
 
 	return videos, nil
 }
+
+func Search(term string, limit int) ([]postgres.Video, error) {
+	rows, err := conn.Query(
+		context.Background(),
+		"SELECT id, name, description, user_id FROM videos ORDER BY similarity(name, $1) DESC LIMIT $2",
+		term,
+		limit,
+	)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var videos []postgres.Video
+	for rows.Next() {
+		var video postgres.Video
+		if err := rows.Scan(&video.ID, &video.Name, &video.Description, &video.UserID); err != nil {
+			return nil, err
+		}
+		videos = append(videos, video)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return videos, nil
+}
