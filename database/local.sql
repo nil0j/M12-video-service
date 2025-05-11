@@ -1,3 +1,5 @@
+create extension pg_trgm;
+
 create database jirafeitor;
 create user jirafeitor_user with password 'changeme';
 
