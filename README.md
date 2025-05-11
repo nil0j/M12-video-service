@@ -34,7 +34,7 @@ Look through the documentation,
 it provides the same information that a UML diagram would.
 
 If you still need one:
-![UML](umlatt1.png)
+![UML](documentation/umlatt1.png)
 
 ## Architecture
 This project uses a common ideomatic Gin Gonic architecture.
