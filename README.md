@@ -27,11 +27,10 @@ Deployed at [giraffe.niliara.net](giraffe.niliara.net)
 
 Documentation: [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api/docs/index.html)
 
-## What about the UML diagram?
-Look through the documentation,
-it provides the same information that a UML diagram would.
+## UML diagram
+The documentation already provides a lot of information,
+but here's one if you still need it:
 
-If you still need one:
 ![UML](documentation/umlatt1.png)
 
 ## Architecture
