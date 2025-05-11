@@ -23,9 +23,9 @@ This project was developed as part of the Web Development course at ETP Xavier.
 * **Gin Gonic** Super minimal and fast Go framework for basic functionality
 * **Postgresql** It was meant for more advanced features, but the only remarkable utility of it is to fuzzy search. Aside from that, it's just a basic relational database.
 
-Deployed at [giraffe.niliara.net](giraffe.niliara.net)
+Deployed at [giraffe.niliara.net](https://giraffe.niliara.net)
 
-Documentation: [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api/docs/index.html)
+Documentation: [giraffe.niliara.net/api/docs/index.html](https://giraffe.niliara.net/api/docs/index.html)
 
 ## UML diagram
 The documentation already provides a lot of information,
@@ -99,7 +99,7 @@ Postgres, Go, Rust and ffmpeg.
 All the libraries they depend on are in the go.mod and Cargo.toml files.
 
 ## Endpoints
-Listed in the [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api/docs/index.html)
+Listed in [swagger](https://giraffe.niliara.net/api/docs/index.html)
 
 ## Honorable mentions
 There was an attempt to make a cross-platform GUI
