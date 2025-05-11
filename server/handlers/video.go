@@ -38,7 +38,7 @@ func GetVideo(c *gin.Context) {
 	}
 
 	_ = filepath.Join(folderPath, targetFileName)
-	c.Redirect(http.StatusTemporaryRedirect, "https://giraffeitor.niliara.net/api/video/realsource/"+c.Param("id")+"/"+targetFileName)
+	c.Redirect(http.StatusTemporaryRedirect, "https://giraffe.niliara.net/api/video/realsource/"+c.Param("id")+"/"+targetFileName)
 	// c.File(filePath)
 }
 
