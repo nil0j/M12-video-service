@@ -2,6 +2,8 @@
 
 [![Go](https://img.shields.io/badge/Go-1.x-blue.svg?style=flat-square)](https://golang.org/)
 
+![giraffe](documentation/giraffe.png)
+
 This project is a video service from where users can upload and play videos.
 
 This project was developed as part of the Web Development course at ETP Xavier.
