@@ -24,7 +24,7 @@ definitions:
         type: integer
       name:
         type: string
-      userID:
+      user_id:
         type: integer
     type: object
   responses.jsonError:

@@ -3,6 +3,7 @@ use gtk::prelude::*;
 use gtk::{Application, ApplicationWindow};
 
 mod components;
+mod models;
 mod scenes;
 
 pub fn build_ui(app: &Application) {
