@@ -33,5 +33,73 @@ Documentation: [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api
 Look through the documentation,
 it provides the same information that a UML diagram would.
 
-If you still need one, this is my humble attempt at making it:
+If you still need one:
+![UML](umlatt1.png)
 
+## Architecture
+This project uses a common ideomatic Gin Gonic architecture.
+There is not much reason put into it, it's just by convention.
+
+If I needed to give it a name,
+it would probably be a layered architecture
+because of the way it separates things
+(and it's certainly not MVC).
+
+```
+├── cmd
+│   └── docs // swag init
+├── config
+├── docs // swagger - auto generated
+├── handlers
+├── middlewares
+├── models
+│   ├── api
+│   ├── errorresponses
+│   ├── postgres
+│   └── responses
+├── repository
+├── routes
+├── static
+└── utils
+    ├── auth
+    ├── thumbnail
+    └── upload
+```
+
+The process is simple:
+the requests are recieved in routes/
+and handled in handlers/.
+If they need to interact with the database,
+they will do so from the repository/ layer.
+
+Json responses and custom errors are
+saved in /models/responses and /models/errorresponses,
+respectively.
+
+
+
+## Details of the code
+### Backend
+It is worth mentioning that the program generates
+thumbnails using an ffmpeg command.
+The program also redirects video links into nginx-handled links,
+that way it won't run out of cache.
+
+Aside from that, there isn't much to tell.
+Golang is a language meant to be dead simple,
+It's not like Javascript, which can do anything and nothing good at the same time.
+Go has a simple way of handling things and that's about it.
+
+And especially since the backend uses Gin Gonic,
+there is simply nothing to be said about this code.
+Nothing unique or remarkable.
+As far as I'm aware, this is the standard way to implement
+Gin with JWT and Pgx.
+
+
+## Dependencies
+Postgres, Go, Rust and ffmpeg.
+All the libraries they depend on are in the go.mod and Cargo.toml files.
+
+## Endpoints
+Listed in the [giraffe.niliara.net/api/docs/index.html](giraffe.niliara.net/api/docs/index.html)
