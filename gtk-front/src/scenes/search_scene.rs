@@ -1,12 +1,14 @@
-use gtk;
 use gtk::glib;
 use gtk::prelude::*;
 
+use super::video_scene;
 use crate::models::Video;
 use reqwest;
 use serde_json;
 
-pub fn get() -> gtk::Widget {
+use crate::AppData;
+
+pub fn get(app_data: &AppData) -> gtk::Widget {
     let box_ = gtk::Box::new(gtk::Orientation::Vertical, 5);
     box_.append(&gtk::Label::new(Some("Search")));
 
@@ -17,7 +19,8 @@ pub fn get() -> gtk::Widget {
             for video in response {
                 println!("{}, {}", video.name, video.id);
                 let btn = gtk::Button::with_label(&video.name);
-                btn.connect_clicked(move |_| println!("Clicked {}", &video.id));
+                let refe = &app_data.current_scene;
+                btn.connect_clicked(move |_| refe = video_scene.get());
                 box_clone.append(&btn);
             }
         }

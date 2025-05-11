@@ -12,6 +12,6 @@ pub fn get() -> gtk::Widget {
     let search = search_scene::get();
     scene.add_child(&search);
 
-    scene.set_visible_child(if false { &video } else { &search });
+    scene.set_visible_child(if true { &video } else { &search });
     return scene.upcast();
 }

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"net/http"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -36,8 +37,9 @@ func GetVideo(c *gin.Context) {
 		targetFileName = files[0].Name()
 	}
 
-	filePath := filepath.Join(folderPath, targetFileName)
-	c.File(filePath)
+	_ = filepath.Join(folderPath, targetFileName)
+	c.Redirect(http.StatusTemporaryRedirect, "https://giraffeitor.niliara.net/api/video/realsource/"+c.Param("id")+"/"+targetFileName)
+	// c.File(filePath)
 }
 
 // @Tags Videos

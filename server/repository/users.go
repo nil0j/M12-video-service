@@ -56,12 +56,12 @@ func LogIn(user postgres.PostgresUserPost) (string, error) {
 }
 
 func GetUser(id int) (postgres.PostgresUserInfo, error) {
-	var username string
+	var user postgres.PostgresUserInfo
 	log.Println(id)
-	err := conn.QueryRow(context.Background(), "SELECT username FROM users WHERE id = $1", id).Scan(&username)
+	err := conn.QueryRow(context.Background(), "SELECT id, username FROM users WHERE id = $1", id).Scan(&user.ID, &user.Username)
 	if err != nil {
 		return postgres.PostgresUserInfo{}, err
 	}
 
-	return postgres.PostgresUserInfo{ID: id, Username: username}, nil
+	return user, nil
 }

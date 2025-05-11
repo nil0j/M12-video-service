@@ -4,6 +4,7 @@ import (
 	"github.com/nil0j/jirafeitor/handlers"
 	"github.com/nil0j/jirafeitor/middlewares"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -11,6 +12,7 @@ import (
 
 func Run() {
 	router := gin.Default()
+	router.Use(cors.Default())
 
 	router.GET("/api/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 

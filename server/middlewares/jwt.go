@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"log"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -21,6 +22,7 @@ func JWT() gin.HandlerFunc {
 		tokenString := authData[1]
 		auth.TokenIsValid(tokenString)
 		c.Set("UserID", auth.GetTokenUserID(tokenString))
+		log.Println(auth.GetTokenUserID(tokenString))
 		c.Next()
 	}
 }
