@@ -196,11 +196,6 @@ paths:
       - Videos
   /videos:
     get:
-      parameters:
-      - description: Limit amount of videos
-        in: query
-        name: limit
-        type: integer
       responses:
         "200":
           description: OK

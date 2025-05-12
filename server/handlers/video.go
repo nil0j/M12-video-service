@@ -86,23 +86,11 @@ func GetVideoInfo(c *gin.Context) {
 }
 
 // @Tags Videos
-// @Param limit query int false "Limit amount of videos"
 // @Success 200 {object} []postgres.Video
 // @Success 400 {object} responses.jsonError
 // @Router /videos [get]
 func GetRecentVideos(c *gin.Context) {
-	var limit int
-	{
-		limitInput := c.Query("limit")
-
-		var err error
-		limit, err = strconv.Atoi(limitInput)
-		if err != nil {
-			limit = 10 // default limit
-		}
-	}
-
-	videos, err := repository.GetRecentVideos(limit)
+	videos, err := repository.GetRecentVideos()
 	if err != nil {
 		responses.HandleError(c, err)
 		return

@@ -249,14 +249,6 @@ const docTemplate = `{
                 "tags": [
                     "Videos"
                 ],
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Limit amount of videos",
-                        "name": "limit",
-                        "in": "query"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",

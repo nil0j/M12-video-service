@@ -22,11 +22,10 @@ func GetVideoInfo(id int) (postgres.Video, error) {
 	return info, nil
 }
 
-func GetRecentVideos(limit int) ([]postgres.Video, error) {
+func GetRecentVideos() ([]postgres.Video, error) {
 	rows, err := conn.Query(
 		context.Background(),
-		"SELECT id, name, description, user_id FROM videos ORDER BY id DESC LIMIT $1",
-		limit,
+		"SELECT id, name, description, user_id FROM videos ORDER BY id DESC",
 	)
 	if err != nil {
 		return nil, err
@@ -52,9 +51,8 @@ func GetRecentVideos(limit int) ([]postgres.Video, error) {
 func Search(term string, limit int) ([]postgres.Video, error) {
 	rows, err := conn.Query(
 		context.Background(),
-		"SELECT id, name, description, user_id FROM videos ORDER BY similarity(name, $1) DESC LIMIT $2",
+		"SELECT id, name, description, user_id FROM videos ORDER BY similarity(name, $1) DESC",
 		term,
-		limit,
 	)
 	if err != nil {
 		return nil, err
