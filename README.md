@@ -97,7 +97,7 @@ Gin with JWT and Pgx.
 
 
 ## Dependencies
-Postgres, Go, Rust and ffmpeg.
+Postgres, Go, Rust (for the frontend) and ffmpeg.
 All the libraries they depend on are in the go.mod and Cargo.toml files.
 
 ## Endpoints
@@ -105,6 +105,6 @@ Listed in [swagger](https://giraffe.niliara.net/api/docs/index.html)
 
 ## Honorable mentions
 There was an attempt to make a cross-platform GUI
-(located at gtk-front/.
+(located at gtk-front/).
 However, Rust's way to handle async and borrowing
 made it extremely hard and we had to give it up.
