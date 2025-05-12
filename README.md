@@ -24,8 +24,11 @@ This project was developed as part of the Web Development course at ETP Xavier.
 * **Go:** The primary programming language.
 * **Gin Gonic** Super minimal and fast Go framework for basic functionality
 * **Postgresql** It was meant for more advanced features, but the only remarkable utility of it is to fuzzy search. Aside from that, it's just a basic relational database.
+* **W3 Technologies** The website works with basic html/css/js for a lightweight and fast experience.
 
-Deployed at [giraffe.niliara.net](https://giraffe.niliara.net)
+Frontend deployed at [](https://brugir.github.io/M12-UF3-PF/)
+
+Api deployed at [giraffe.niliara.net](https://giraffe.niliara.net)
 
 Documentation: [giraffe.niliara.net/api/docs/index.html](https://giraffe.niliara.net/api/docs/index.html)
 
